@@ -1,11 +1,13 @@
-// server.js
 const jsonServer = require("json-server");
+
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
-server.use("/api", router); // Prefix all endpoints with /api
+server.use("/api", router);
 
-// Export for Vercel
-module.exports = server;
+// Export request handler for Vercel
+module.exports = (req, res) => {
+  server(req, res);
+};
