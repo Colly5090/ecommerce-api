@@ -1,11 +1,11 @@
 const jsonServer = require("json-server");
+const path = require("path");
 
 const server = jsonServer.create();
-const router = jsonServer.router("db.json");
+const router = jsonServer.router(path.join(__dirname, "db.json"));
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
 server.use("/api", router);
 
-// Vercel needs a function export, not .listen()
-module.exports = server;
+module.exports = server; // <-- Important for Vercel
