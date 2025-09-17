@@ -7,7 +7,5 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use("/api", router);
 
-// Export request handler for Vercel
-module.exports = (req, res) => {
-  server(req, res);
-};
+// Vercel needs a function export, not .listen()
+module.exports = server;
